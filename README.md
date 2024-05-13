@@ -1,4 +1,4 @@
-# DilMil REST API using Flask-Smorest and Docker
+# DilMil REST API using Flask-Smorest, SQLAlchemy, Redis, Marshmallow and Docker
 ## postman collection 
 [dilmil postman collection](https://raw.githubusercontent.com/sumitnirankari/dilmil-api/main/dilmil.postman_collection.json)
 ## To run the project:
