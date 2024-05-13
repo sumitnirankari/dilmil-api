@@ -1,6 +1,6 @@
 # DilMil REST API using Flask-Smorest and Docker
 postman collection 
- - https://api.postman.com/collections/2877245-a7a538ab-b300-458f-bf14-885980302550?access_key=PMAT-01HXRQGXN5PFPN2DFY74KW33Q2
+ - https://api.postman.com/collections/2877245-a7a538ab-b300-458f-bf14-885980302550
 
 To run the project:
     docker-compose up --build
