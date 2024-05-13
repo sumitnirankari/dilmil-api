@@ -3,16 +3,16 @@ from flask.views import MethodView
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_smorest import Blueprint
 
+from app_cache import AppCache
 from db import db
-from dil_redis import DilRedis
 from models import UserPrefModel
 from schemas import UserPrefSchema
+from settings import REDIS_ENABLED
 
 logger = logging.getLogger(__name__)
 blp = Blueprint("UserPreferences", "user_pref", description="Operations on user's preferences")
 
-redis = DilRedis()
-redis_client = redis.redis_client()
+cache = AppCache().Cache()
 
 @blp.route("/preference")
 class UserPreferences(MethodView):
@@ -38,6 +38,6 @@ class UserPreferences(MethodView):
             pref.height_min=user_pref['height_min']
             pref.height_max=user_pref['height_max']
         db.session.commit()
-        if redis.available():
-            redis_client.delete(f'user_pref_{user_id}')
+        if REDIS_ENABLED:
+            cache.delete(f'user_pref_{user_id}')
         return pref

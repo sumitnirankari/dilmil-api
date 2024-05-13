@@ -26,7 +26,7 @@ class UserLikes(MethodView):
     @blp.arguments(UserLikesSchema)
     def post(self, like_data):
         user_id = get_jwt_identity()
-        like = UserLikesModel.query.filter(UserLikesModel.user_id==user_id and UserLikesModel.target_user_id==like_data['target_user_id']).first()
+        like = UserLikesModel.query.filter(and_(UserLikesModel.user_id==user_id, UserLikesModel.target_user_id==like_data['target_user_id'])).first()
         # dob_format = '%Y-%m-%d'
         if like is None:
             like = UserLikesModel(
@@ -43,7 +43,7 @@ class UserLikes(MethodView):
 
     def check_for_match(self, like: UserLikesModel):
         if like.liked:
-            reverse_like = UserLikesModel.query.filter(UserLikesModel.user_id==like.target_user_id and UserLikesModel.target_user_id==like.user_id).first()
+            reverse_like = UserLikesModel.query.filter(and_(UserLikesModel.user_id==like.target_user_id, UserLikesModel.target_user_id==like.user_id)).first()
             if reverse_like:
                 logger.debug(f'Its a match between user {like.user_id} and {like.target_user_id}')
                 if redis.available():

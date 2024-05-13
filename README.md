@@ -4,6 +4,8 @@ postman collection
 To run the project:
     docker-compose up --build
 
+It will run the web project on [localhost:5000](http://localhost:5000/swagger) and swagger on http://localhost:5000/swagger
+
 Other commands:
 To setup the project with fresh database:
     - clean `migrations` folder and `instance` folder
@@ -13,9 +15,9 @@ To setup the project with fresh database:
 To build the docker:
     docker build . -t dilmil-api
 
-It will run the web project on [localhost:5000](http://localhost:5000/swagger) and swagger on http://localhost:5000/swagger
 
-To run in local:
+
+To run on local:
 - source venv/bin/activate
 - pip install -r requirements.txt
 - pip install -r requirements-dev.txt

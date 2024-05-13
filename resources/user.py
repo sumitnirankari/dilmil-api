@@ -1,7 +1,4 @@
-from datetime import timedelta
 import logging
-import os
-from flask import json
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from flask_jwt_extended import (
@@ -14,18 +11,17 @@ from flask_jwt_extended import (
 from passlib.hash import pbkdf2_sha256
 from sqlalchemy import or_
 
+from app_cache import AppCache
 from db import db
-from dil_redis import DilRedis
 from models import UserModel
 from schemas import UserMeSchema, UserSchema, UserRegisterSchema, UserViewSchema
 from services.utils import calculate_age_from_dob
-from settings import REDIS_HOST, REDIS_PORT
+from settings import REDIS_ENABLED
 
 logger = logging.getLogger(__name__)
 blp = Blueprint("Users", "users", description="Operations on users")
-redis = DilRedis()
-redis_client = redis.redis_client()
 
+cache = AppCache().Cache()
 
 @blp.route("/register")
 class UserRegister(MethodView):
@@ -73,8 +69,8 @@ class TokenRefresh(MethodView):
         current_user = get_jwt_identity()
         new_token = create_access_token(identity=current_user, fresh=False)
         jti = get_jwt()["jti"]
-        if redis.available():
-            redis_client.setex(jti, timedelta(days=2), '0')
+        if REDIS_ENABLED:
+            cache.set(jti, '0', timeout=3600*48)
         return {"access_token": new_token}, 200
 
 @blp.route("/user")
@@ -82,7 +78,14 @@ class Me(MethodView):
     @jwt_required()
     @blp.response(200, UserMeSchema)
     def get(self):
-        user = UserModel.query.get(get_jwt_identity())
+        user_id = get_jwt_identity()
+        redis_key =f'user_me_{user_id}'
+        user = cache.get(redis_key) if REDIS_ENABLED else None
+        if user:
+            return user
+        user = UserModel.query.get(user_id)
+        if REDIS_ENABLED:
+            cache.set(redis_key, user.serialize(), timeout=3600)
         return user
 
 @blp.route("/user/<int:user_id>")
@@ -91,12 +94,12 @@ class User(MethodView):
     @blp.response(200, UserViewSchema)
     def get(self, user_id):
         redis_key =f'user_{user_id}'
-        user = redis_client.get(redis_key) if redis.available() else None
+        user = cache.get(redis_key) if REDIS_ENABLED else None
         if user:
-            return json.loads(user)
+            return user
         user = UserModel.query.get_or_404(user_id)
         user.profile.age = calculate_age_from_dob(user.profile.dob)
-        if redis.available():
-            redis_client.setex(redis_key, 3600, json.dumps(user))
+        if REDIS_ENABLED:
+            cache.set(redis_key, user.serialize(), timeout=3600)
         return user
 

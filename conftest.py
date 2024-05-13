@@ -1,8 +1,13 @@
+import os
 import pytest
 from flask_jwt_extended import create_access_token
 from app import create_app
 from db import db
 
+
+@pytest.fixture(scope="session", autouse=True)
+def set_env():
+    os.environ["REDIS_ENABLED"] = "False"
 
 @pytest.fixture()
 def app():

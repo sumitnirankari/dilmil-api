@@ -1,15 +1,19 @@
-
 services:
-  redis-service:
+  redis:
     image: redis:latest
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
       interval: 1s
       timeout: 3s
       retries: 5
     command: ["redis-server"]
     ports:
       - "6379:6379"
+    volumes:
+      - ./data:/data
+    networks:
+      - my-network
+
   dilmil-api:
     build: .
     ports:
@@ -18,8 +22,13 @@ services:
     volumes:
       - .:/gpanel
     depends_on:
-      - db
-      - redis-service
+      db:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    networks:
+      - my-network
+
   db:
     image: postgres:latest
     volumes:
@@ -30,6 +39,12 @@ services:
       - POSTGRES_DB=dilmil
     ports:
       - 5432:5432
+    networks:
+      - my-network
 
 volumes:
   postgres_data:
+  data:
+
+networks:
+  my-network:

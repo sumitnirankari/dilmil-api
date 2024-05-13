@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 REDIS_ENABLED = bool(os.getenv("REDIS_ENABLED", 'True'))
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_HOST = os.getenv("REDIS_HOST", "redis")
 REDIS_PORT = os.getenv("REDIS_PORT", "6379")
-REDIS_URL = os.getenv("REDIS_URL", 'redis://localhost:6379')
+REDIS_URL = os.getenv("REDIS_URL", 'redis://redis:6379')
 QUEUES = ["emails", "default"]
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
