@@ -37,3 +37,7 @@ pip install -r requirements-dev.txt
 ```
 python app.py
 ```
+To run testcases
+```
+pytest
+```
