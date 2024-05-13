@@ -1,0 +1,291 @@
+{
+	"collection": {
+	  "info": {
+		"_postman_id": "a7a538ab-b300-458f-bf14-885980302550",
+		"name": "DilMil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"updatedAt": "2024-05-13T07:57:36.000Z",
+		"uid": "2877245-a7a538ab-b300-458f-bf14-885980302550",
+		"createdAt": null,
+		"lastUpdatedBy": null
+	  },
+	  "item": [
+		{
+		  "name": "Register",
+		  "id": "cfe617f6-5634-42f0-a56d-d89d97c656a5",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"username\": \"user\",\r\n  \"password\": \"test\",\r\n  \"email\": \"dilmil_test@email.com\"\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/register",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"register"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-cfe617f6-5634-42f0-a56d-d89d97c656a5"
+		},
+		{
+		  "name": "Login",
+		  "id": "da812c99-9c67-4e96-9f0e-5b2328b43c6e",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"username\": \"user\",\r\n  \"password\": \"test\"\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/login",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"login"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-da812c99-9c67-4e96-9f0e-5b2328b43c6e"
+		},
+		{
+		  "name": "User - me",
+		  "id": "3a86aa7e-1f6f-42f9-9994-40e3b7f6a0e1",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "GET",
+			"header": [],
+			"url": {
+			  "raw": "{{server}}/user",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"user"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-3a86aa7e-1f6f-42f9-9994-40e3b7f6a0e1"
+		},
+		{
+		  "name": "User - public profile",
+		  "id": "99ee5281-2170-4e7b-8a77-7ab61b590869",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "GET",
+			"header": [],
+			"url": {
+			  "raw": "{{server}}/user/1",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"user",
+				"1"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-99ee5281-2170-4e7b-8a77-7ab61b590869"
+		},
+		{
+		  "name": "Profile - create/update",
+		  "id": "66e49668-4242-4996-90fc-ff2157d3ad7a",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"first_name\": \"test\",\r\n  \"last_name\": \"user\",\r\n  \"dob\": \"2000-05-12\",\r\n  \"height\": 160\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/profile",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"profile"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-66e49668-4242-4996-90fc-ff2157d3ad7a"
+		},
+		{
+		  "name": "Preference - create/update",
+		  "id": "0dfaf8bf-e2db-48bf-8d22-83348bf2c481",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"age_min\": 18,\r\n  \"age_max\": 40,\r\n  \"height_min\": 150,\r\n  \"height_max\": 170\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/preference",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"preference"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-0dfaf8bf-e2db-48bf-8d22-83348bf2c481"
+		},
+		{
+		  "name": "Search - based on user pref",
+		  "id": "4cec7324-c052-4b75-8561-1fade12b5e94",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"page\": 1,\r\n  \"page_size\": 20,\r\n  \"show_liked\": false,\r\n  \"sort_on\": \"dob\",// dob, height, id, created_at, updated_at\r\n  \"sort_order\": \"desc\" // asc, desc\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/search",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"search"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-4cec7324-c052-4b75-8561-1fade12b5e94"
+		},
+		{
+		  "name": "Recommendations - populated by dilmil",
+		  "id": "765cbf3c-7f8e-4673-99ea-d28f7c15d569",
+		  "protocolProfileBehavior": {
+			"disableBodyPruning": true
+		  },
+		  "request": {
+			"method": "POST",
+			"header": [],
+			"body": {
+			  "mode": "raw",
+			  "raw": "{\r\n  \"page\": 1,\r\n  \"page_size\": 20\r\n}",
+			  "options": {
+				"raw": {
+				  "language": "json"
+				}
+			  }
+			},
+			"url": {
+			  "raw": "{{server}}/recommendations",
+			  "host": [
+				"{{server}}"
+			  ],
+			  "path": [
+				"recommendations"
+			  ]
+			}
+		  },
+		  "response": [],
+		  "uid": "2877245-765cbf3c-7f8e-4673-99ea-d28f7c15d569"
+		}
+	  ],
+	  "auth": {
+		"type": "bearer",
+		"bearer": [
+		  {
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzE1NTg3MDQ1LCJqdGkiOiJmMjhjN2IyYi1iYWFjLTQ3NjgtYjNlYy03MmM3MGY4YzUzYTYiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoyMDEsIm5iZiI6MTcxNTU4NzA0NSwiY3NyZiI6IjI0NzMyNGYwLWZmNmEtNGJkMC05MDA1LTg2Y2JlYzZhNDVlNCIsImV4cCI6MTcxNTYzMDI0NSwiaXNfYWRtaW4iOmZhbHNlfQ.fKu8I3J7kF8cwlxGwqNp-0HQFQi5tp9BYIv1MqI2qjw",
+			"type": "string"
+		  }
+		]
+	  },
+	  "event": [
+		{
+		  "listen": "prerequest",
+		  "script": {
+			"id": "acb992c8-f6ea-4f76-a87a-b5f8290feff3",
+			"type": "text/javascript",
+			"packages": {
+  
+			},
+			"exec": [
+			  ""
+			]
+		  }
+		},
+		{
+		  "listen": "test",
+		  "script": {
+			"id": "17df8bb8-838b-45c9-80fc-2b1c8cfa4406",
+			"type": "text/javascript",
+			"packages": {
+  
+			},
+			"exec": [
+			  ""
+			]
+		  }
+		}
+	  ],
+	  "variable": [
+		{
+		  "key": "server",
+		  "value": "localhost:5000",
+		  "type": "string"
+		}
+	  ]
+	}
+  }
